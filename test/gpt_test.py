@@ -1,19 +1,23 @@
-from typing import List
+# 導入套件
+from typing import Optional
 
 import openai
-import re
-import time
-
-from openai.types.chat import ChatCompletion, ChatCompletionMessage
-from openai.types.chat.chat_completion import Choice
-
+from openai.types.chat import ChatCompletion
 from interface.gpt_info import gpt_info
 
 
-def gpt_test(api_key: str, info: gpt_info, system_prompt: str) -> ChatCompletion:
+# Part 1 範例
+# @api_key :API金鑰
+# @info: gpt設定
+# @system_prompt: 預設系統prompt
+def gpt_test(api_key: str, info: gpt_info, system_prompt: str) -> Optional[str]:
+    # 記憶陣列
     mem_list = []
+
+    # openai客戶端
     client = openai.OpenAI(api_key=api_key)
 
+    # 新增系統預設prompt
     mem_list.append(
         {
             "role": "system",
@@ -21,10 +25,12 @@ def gpt_test(api_key: str, info: gpt_info, system_prompt: str) -> ChatCompletion
         }
     )
 
+    # 取得回應
     response: ChatCompletion = client.chat.completions.create(
         model=info.openai_model,
         messages=mem_list,
         temperature=info.temperature
     )
 
+    # 返回回應
     return response.choices[0].message.content
