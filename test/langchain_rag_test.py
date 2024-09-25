@@ -7,7 +7,7 @@ from langchain.embeddings import HuggingFaceEmbeddings
 from langchain.vectorstores import FAISS
 
 
-# Part 2 範例
+# Part 3 範例
 def langchain_rag_test():
     # 指定用甚麼字符串分割文本
     split_text_by = '"Title: Mocked up record'

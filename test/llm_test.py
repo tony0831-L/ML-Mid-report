@@ -4,7 +4,7 @@ from transformers import AutoTokenizer, AutoModelForCausalLM
 
 # Part 2 範例
 # @model :hugginface 模型
-# @max_length: 限制回應長度
+# @max_length: 最大長度
 def llm_test(model: str, max_length: int, prompt: str) -> str:
     # 加載標記器
     tokenizer = AutoTokenizer.from_pretrained(model)
@@ -22,7 +22,12 @@ def llm_test(model: str, max_length: int, prompt: str) -> str:
     )
 
     # 處理回應, 只保留生成部分, 並將生成的回應轉成可讀字串
-    response_hf: str = tokenizer.decode(response_hf_encoded[:, user_input_ids.shape[-1]:][0], skip_special_tokens=True)
+    response_hf: str = tokenizer.decode(
+
+        response_hf_encoded[:, user_input_ids.shape[-1]:][0],
+        skip_special_tokens=True
+
+    )
 
     # 返回回應
     return response_hf
