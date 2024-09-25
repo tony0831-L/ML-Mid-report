@@ -28,7 +28,7 @@ def langchain_rag_test():
     # 分割.csv檔中內容的字符串
     splitted_docs = text_splitter.split_documents(documents)
 
-    # 生成嵌入表示
+    # 載入嵌入式模型
     embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-mpnet-base-v2")
 
     # 創建向量資料庫
